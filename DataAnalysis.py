@@ -6,15 +6,20 @@ from statsmodels.stats import weightstats as stests
 
 def CalculateZScores(df):
   '''
-  Function I built to calculate the Z scores of each
+  Function I built to calculate the Z scores of each statistic in statslist.
+
+  Null hypothesis: Home and away statistics come from a population with the same mean
+
+  Alternative hypothesis: Home and Away statistics come from separate populations with different means
 
 
   Parameters
   -------------
-
+  df - {Pandas Dataframe} - dataframe with the relevant statistics
 
   Returns
   -------------
+    A list of zscores for each statistic in statslist
   '''
     statslist = ['FGA', 'FG_PCT', 'FG3A', 'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST','TOV', 'STL', 'BLK', 'BLKA', 'PF', 'PFD', 'PTS']
     results = []
