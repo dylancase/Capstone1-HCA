@@ -1,10 +1,22 @@
 import pandas as pd
 import requests
-#import json not sure if i need this for .json() stuff
 
 #nba stats data retrieval
 
 def GetSeason(year, less=True):
+  '''
+  Scrapes a season of NBA Game Statistics from stats.nba.com
+
+  Parameters
+  ---------------
+  year - {int} - year corresponding to the season of data to be retrieved
+
+  less - {boolean} - optional boolean, if true returns a DataFrame with some of the more exotic columns dropped
+
+  Returns
+  ---------------
+  A Pandas Dataframe with the game statistics for the season provided with year.
+  '''
     import requests
 
     cookies = {
@@ -90,6 +102,13 @@ def GetSeason(year, less=True):
 
 
 def GetAllSeasonsAndConcat():
+  '''
+  Scrapes all available seasons worth of game statistics from stats.nba.com
+
+  Returns
+  --------
+  Pandas Dataframe with game data from all available seasons
+  '''
     seasons = []
     for year in range(1996, 2018):
         seasons.append(GetSeason(year))
@@ -99,6 +118,20 @@ def GetAllSeasonsAndConcat():
 #ESPN Standings data retrieval
 
 def getWinPctDiff(year, AllCols = False):
+  '''
+  Scrapes Standings data with Home and Away records from ESPN.com for the season provided in the year parameter.
+
+  Parameters
+  -------------
+  year - {int} - integer denoting which season of data to scrape
+
+  AllCols - {boolean} - Optional boolean, if true, the returned dataframe will include some more exotic columns
+
+  Returns
+  -------------
+  Pandas DataFrame with the standings and win percent difference for home and away for whichever season selected with the parameter year
+  '''
+
     if year == 2019:
         HTML = pd.read_html('https://www.espn.com/nba/standings/_/group/league')
     else:
@@ -126,6 +159,17 @@ def getWinPctDiff(year, AllCols = False):
 
 
 def GetAllWinPctDiffSince(FirstYear):
+  '''
+
+
+  Parameters
+  -------------
+  FirstYear - {int} -
+
+  Returns
+  -------------
+  Pandas DataFrame with all of the standings and win percentage differences for every season starting with the season given with the parameter FirstYear
+  '''
     seasons = []
     for year in range(FirstYear, 2020):
         seasons.append(getWinPctDiff(year))
@@ -135,6 +179,17 @@ def GetAllWinPctDiffSince(FirstYear):
 # ESPN attendance data retrieval
 
 def getAttendance(year):
+  '''
+
+
+  Parameters
+  -------------
+  year - {int} - the year of attendance statistics to return
+
+  Returns
+  -------------
+  Pandas DataFrame with the attendance statistics for the given year
+  '''
     HTML = pd.read_html(f'http://www.espn.com/nba/attendance/_/year/{year}')
     df = HTML[0]
     df = df.drop([0, 1], axis = 0).reset_index(drop=True)
@@ -145,6 +200,17 @@ def getAttendance(year):
     return df.iloc[0:30]
 
 def getAllAttendance(firstyear):
+  '''
+
+
+  Parameters
+  -------------
+
+
+  Returns
+  -------------
+
+  '''
     if firstyear < 2001:
         firstyear = 2001
         print('attendance records only go back to 2001')
@@ -157,6 +223,16 @@ def getAllAttendance(firstyear):
 # ESPN Pace data retrieval
 
 def PaceGetSeason(year):
+  '''
+
+
+  Parameters
+  -------------
+
+
+  Returns
+  -------------
+  '''
     if year == 2019:
         ESPN = pd.read_html('http://www.espn.com/nba/hollinger/teamstats')
     else:
@@ -169,6 +245,16 @@ def PaceGetSeason(year):
 
 
 def PaceGetAllSeasons(firstyear):
+  '''
+
+
+  Parameters
+  -------------
+
+
+  Returns
+  -------------
+  '''
     if firstyear < 2003:
         firstyear = 2003
         print('Pace statistics only go back to 2003')
