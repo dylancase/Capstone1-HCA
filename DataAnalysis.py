@@ -61,23 +61,32 @@ def CalculatePearsonC(df_HCA, df_stats, stat):
 
   Parameters
   -------------
+  df_HCA - {Pandas DataFrame}
+
+  df_stats - {Pandas DataFrame}
+
+  stat - {string} - statistic to test for correlation with HCA
 
 
   Returns
   -------------
+  Correlation coefficient and p-value
   '''
     return stats.pearsonr(df_HCA.groupby('year').mean()['win_pct_diff'], df_stats[stat][8:23])
 
 
 def CalculatePearsonCorrelationAllStats(df_HCA,df_stats):
   '''
-
+  Prints the correlation coefficient and p-value between HCA and every statistic in statsList
   Parameters
   -------------
+  df_HCA - {Pandas DataFrame}
 
+  df_stats - {Pandas DataFrame}
 
   Returns
   -------------
+  None
   '''
     statslist = ['FGM', 'FGA', 'FG_PCT', 'FG3M', 'FG3A',
           'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST', 'TOV',
