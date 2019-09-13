@@ -5,9 +5,9 @@ from statsmodels.stats import weightstats as stests
 
 
 def CalculateZScores(df):
-    stats = ['FGA', 'FG_PCT', 'FG3A', 'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST','TOV', 'STL', 'BLK', 'BLKA', 'PF', 'PFD', 'PTS']
+    statslist = ['FGA', 'FG_PCT', 'FG3A', 'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST','TOV', 'STL', 'BLK', 'BLKA', 'PF', 'PFD', 'PTS']
     results = []
-    for stat in stats:
+    for stat in statslist:
         homeMean = np.mean(df[df['Home']==1][stat])
         awayMean = np.mean(df[df['Home']==0][stat])
         OverallMean = np.mean(df[stat])
@@ -25,3 +25,12 @@ def CalculateZScores2(df, alpha):
         ztest, pval = stests.ztest(df[df['Home']==1][stat], x2 = df[df['Home']==0][stat], value = 0, alternative = 'two-sided')
         results.append(str(stat) + ' z test: ' + str(ztest) + ' p-value: ' + str(pval) + ' significant for ' + str(stat) + ': ' + str(pval<alpha))
     return results
+
+
+def CalculatePearsonCorrelation(df_HCA,df_stats):
+    statslist =
+    for stat in ['FGM', 'FGA', 'FG_PCT', 'FG3M', 'FG3A',
+          'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST', 'TOV',
+          'STL', 'BLK', 'BLKA', 'PF', 'PFD', 'PTS', 'PLUS_MINUS']:
+        correlation, pvalue = stats.pearsonr(df_HCA.groupby('year').mean()['win_pct_diff'], df_stats[stat][8:23])
+        print(str(stat) + ' correlation: '+ str(correlation) + '  p-value: ' + str(pvalue) + ' significant: ' + str(pvalue < .05))

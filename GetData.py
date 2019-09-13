@@ -1,3 +1,7 @@
+import pandas as pd
+import requests
+#import json not sure if i need this for .json() stuff
+
 #nba stats data retrieval
 
 def GetSeason(year, less=True):
@@ -92,7 +96,7 @@ def GetAllSeasonsAndConcat():
     return pd.concat(seasons)
 
 
-#ESPN data retrieval
+#ESPN Standings data retrieval
 
 def getWinPctDiff(year, AllCols = False):
     if year == 2019:
@@ -108,17 +112,11 @@ def getWinPctDiff(year, AllCols = False):
         result = result.join(HTML[3])
 
     result['HOME_LIST'] = result['HOME'].str.split('-')
-
     result.loc[:, 'HOME_WIN_PCT'] = result.HOME_LIST.map(lambda x:int(x[0])/(int(x[0])+int(x[1])))
-
     result['AWAY_LIST'] = result['AWAY'].str.split('-')
-
     result.loc[:, 'AWAY_WIN_PCT'] = result.AWAY_LIST.map(lambda x:int(x[0])/(int(x[0])+int(x[1])))
-
     result['win_pct_diff'] = result['HOME_WIN_PCT']-result['AWAY_WIN_PCT']
-
     result = result.rename(columns={0:'Team', '0':'Team'})
-
     result['year'] = year
 
     if AllCols:
@@ -136,3 +134,45 @@ def GetAllWinPctDiffSince(FirstYear):
 
 # ESPN attendance data retrieval
 
+def getAttendance(year):
+    HTML = pd.read_html(f'http://www.espn.com/nba/attendance/_/year/{year}')
+    df = HTML[0]
+    df = df.drop([0, 1], axis = 0).reset_index(drop=True)
+    df.columns = ['Rank', 'Team', 'Home_GMS', 'Tot_Attend', 'AVG_Attend', 'PCT_FILLED',
+                   'Road_GMS', 'Road_AVG_Attend', 'Road_PCT_Filled', 'TOTAL_GMS',
+                   'Overall_AVG_Attend', 'Overall_PCT_Filled']
+
+    return df.iloc[0:30]
+
+def getAllAttendance(firstyear):
+    if firstyear < 2001:
+        firstyear = 2001
+        print('attendance records only go back to 2001')
+    result = []
+    for year in range(firstyear, 2019):
+        result.append(getAttendance(year))
+    return pd.concat(result)
+
+
+# ESPN Pace data retrieval
+
+def PaceGetSeason(year):
+    if year == 2019:
+        ESPN = pd.read_html('http://www.espn.com/nba/hollinger/teamstats')
+    else:
+        ESPN = pd.read_html(f'http://www.espn.com/nba/hollinger/teamstats/_/sort/paceFactor/year/{year}')
+    df = ESPN[0].drop([0], axis = 0).reset_index(drop=True)
+    df.columns = df.iloc[0][:]
+    df = df.drop([0], axis = 0).reset_index(drop=True)
+    df['year'] = year
+    return df
+
+
+def PaceGetAllSeasons(firstyear):
+    if firstyear < 2003:
+        firstyear = 2003
+        print('Pace statistics only go back to 2003')
+    seasons = []
+    for year in range(firstyear, 2020):
+        seasons.append(PaceGetSeason(year))
+    return pd.concat(seasons)
