@@ -6,6 +6,15 @@ from statsmodels.stats import weightstats as stests
 
 def CalculateZScores(df):
   '''
+  Function I built to calculate the Z scores of each
+
+
+  Parameters
+  -------------
+
+
+  Returns
+  -------------
   '''
     statslist = ['FGA', 'FG_PCT', 'FG3A', 'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST','TOV', 'STL', 'BLK', 'BLKA', 'PF', 'PFD', 'PTS']
     results = []
@@ -22,6 +31,17 @@ def CalculateZScores(df):
 
 def CalculateZScores2(df, alpha):
   '''
+  Function to calculate Z scores, leveraging the built in stests.ztest. Ended up being a nice confirmation of the calculations I did in my original Zscore function
+
+  Parameters
+  -------------
+  df - {Pandas DataFrame} -
+
+  alpha - {float}  - Type 1 error rate
+
+  Returns
+  -------------
+  A list of zscores for each statistic in statsToTest
   '''
     statsToTest = ['FGA', 'FG_PCT', 'FG3A', 'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST','TOV', 'STL', 'BLK', 'BLKA', 'PF', 'PFD', 'PTS']
     results = []
@@ -33,12 +53,26 @@ def CalculateZScores2(df, alpha):
 
 def CalculatePearsonC(df_HCA, df_stats, stat):
   '''
+
+  Parameters
+  -------------
+
+
+  Returns
+  -------------
   '''
     return stats.pearsonr(df_HCA.groupby('year').mean()['win_pct_diff'], df_stats[stat][8:23])
 
 
 def CalculatePearsonCorrelationAllStats(df_HCA,df_stats):
   '''
+
+  Parameters
+  -------------
+
+
+  Returns
+  -------------
   '''
     statslist = ['FGM', 'FGA', 'FG_PCT', 'FG3M', 'FG3A',
           'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 'DREB', 'REB', 'AST', 'TOV',

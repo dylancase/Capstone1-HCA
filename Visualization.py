@@ -2,7 +2,7 @@ import matplotlib.pyplot as pyplot
 
 def GraphZScores(df):
   '''
-  Graphs (Bar) Z-scores of all relevant statistics in the passed in data frame
+  Graphs (Bar) Z-scores of all relevant statistics in the in df
 
   Parameters
   ---------------
@@ -50,3 +50,30 @@ def GraphStatsOverTime(statlist, df, save=False):
     fig.suptitle(' '.join(stats) + ' Per NBA Season', size = 30)
     if save:
       plt.savefig(' '.join(stats) + 'PerSeason')
+
+
+def GraphTimeZonevsHCA(save = False):
+    fig, ax = plt.subplots(figsize = (16, 10))
+    ax.bar(['Pacific', 'Mountain','Central', 'Eastern'], TZWinPCT.groupby('Timezone').mean()['win_pct_diff'],
+        color = ['purple', 'pink', 'yellow', 'green'], width = 0.5)
+    ax.set_ylabel('WinPctDiff', size = 20)
+    ax.set_xlabel('Timezone', size = 20)
+    fig.suptitle('Avg Win Percent Difference by timezone', size = 30)
+    if save:
+      plt.savefig('WinPCTvsTZ')
+
+def GraphHCAvsElevation(save = False):
+    fig, ax = plt.subplots(figsize = (16,10))
+    x_data, y_data = [], []
+    for i, abb in enumerate(elev['Team_Abbreviation']):
+        x_data.append(AllWinPct.groupby('Team_Abbreviation').agg({'win_pct_diff': 'mean'}).sort_values('win_pct_diff', ascending = False)['win_pct_diff'][abb])
+        y_data.append(elev['Elevation'][i])
+    ax.scatter(x_data, y_data)
+    ax.set_xlabel('Win Percent Difference', size = 20)
+    ax.set_ylabel('Elevation', size = 20)
+    for i, label in enumerate(elev['Team_Abbreviation']):
+        text = ax.annotate(label, (x_data[i]+.0015, y_data[i]))
+        text.set_fontsize(20)
+    fig.suptitle('Win Percent Difference vs Elevation', size = 40)
+    if save:
+      plt.savefig('WinPctDiffvsElevation')

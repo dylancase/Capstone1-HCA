@@ -120,6 +120,8 @@ def GetAllSeasonsAndConcat():
 def getWinPctDiff(year, AllCols = False):
   '''
   Scrapes Standings data with Home and Away records from ESPN.com for the season provided in the year parameter.
+  Creates new columns Home Record, Home Win Percent, Away Record, Away Win Percent and Win Percent Difference.
+  Returns dataframe with the added columns.
 
   Parameters
   -------------
@@ -160,11 +162,11 @@ def getWinPctDiff(year, AllCols = False):
 
 def GetAllWinPctDiffSince(FirstYear):
   '''
-
+  Scrapes all Standings data with Home and Away records from ESPN.com for the season provided in the year parameter.
 
   Parameters
   -------------
-  FirstYear - {int} -
+  FirstYear - {int} - year to begin scraping
 
   Returns
   -------------
@@ -180,7 +182,7 @@ def GetAllWinPctDiffSince(FirstYear):
 
 def getAttendance(year):
   '''
-
+  Scrape a season worth of attendance data from ESPN
 
   Parameters
   -------------
@@ -201,15 +203,15 @@ def getAttendance(year):
 
 def getAllAttendance(firstyear):
   '''
-
+  Scrapes all available attendance data from ESPN starting from the year provided
 
   Parameters
   -------------
-
+  firstyear - {int} - year to begin scraping
 
   Returns
   -------------
-
+  pandas DataFrame of all attendance data starting from firstyear
   '''
     if firstyear < 2001:
         firstyear = 2001
@@ -224,14 +226,15 @@ def getAllAttendance(firstyear):
 
 def PaceGetSeason(year):
   '''
-
+  Scrapes a season of NBA Pace data from ESPN
 
   Parameters
   -------------
-
+  year - {int} - season to scrape
 
   Returns
   -------------
+  pandas Dataframe of all Pace data from the given season
   '''
     if year == 2019:
         ESPN = pd.read_html('http://www.espn.com/nba/hollinger/teamstats')
@@ -246,14 +249,16 @@ def PaceGetSeason(year):
 
 def PaceGetAllSeasons(firstyear):
   '''
-
+  Scrapes all available Pace data from ESPN starting from the year provided
 
   Parameters
   -------------
-
+  firstyear - {int} - year to begin scraping
 
   Returns
   -------------
+  pandas DataFrame of all Pace data starting from firstyear
+
   '''
     if firstyear < 2003:
         firstyear = 2003
