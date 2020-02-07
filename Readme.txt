@@ -71,7 +71,7 @@ of home team statisticians giving out assists more generously for the home team.
 Personal Fouls are only modestly affected, probably not enough of an effect for the home cooking theory to be the full picture of Home Court Advantage
 
 Free Throw Percentage not really affected much, makes sense, not very demanding kind of play, even if players are fatigued from travel or elevation,
-also not something a referee can affect.
+also not something a referee can affect
 
 Why is HCA declining?
 
@@ -91,7 +91,7 @@ the three point shot might be at least in part responsible for the decline in HC
 
 Why rebounding?
 
-Well again that likely is due to the rise in the three point shot. Three point shots are missed more often that two point shots leading to more rebounds.
+Well again that likely is due to the rise in the three point shot. Three point shots are missed more often that two point shots leading to more rebounds
 
 Three point field goals attempted is also very strongly correlated with a rise in score differential or margin of victory, adding more
 evidence to the theory that the rise in three point field goals are responsible for a decline in HCA
@@ -103,18 +103,18 @@ No, avg attendance does not show correlation with HCA
 
 Time Zone?
 
-Teams from time zones further west were shown to experience slightly stronger effects of HCA.
+Teams from time zones further west were shown to experience slightly stronger effects of HCA
 
-A possible theory for this is that teams on the west coast may have a slight advantage over east coast teams when travelling.
+A possible theory for this is that teams on the west coast may have a slight advantage over east coast teams when travelling
 The idea is that if you are playing a 7pm game on the west coast that feels like 10pm for the east coast team, and if you are playing
-a 7pm game on the east coast, that feels like 4pm for the west coast team.
-If you are planning to compete in a physical activity I imagine you would prefer to compete at 4pm than at 10pm.
+a 7pm game on the east coast, that feels like 4pm for the west coast team
+If you are planning to compete in a physical activity I imagine you would prefer to compete at 4pm than at 10pm
 
 Elevation?
 
 Elevation has a strong effect for the two highest elevation teams: The Denver Nuggets and the Utah Jazz
 
-For the rest of the teams it seems to have no effect.
+For the rest of the teams it seems to have no effect
 
 -----------------------------------------------
 
